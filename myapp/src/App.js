@@ -1,7 +1,7 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
 import clsx from 'clsx'
-import {useTheme} from '@material-ui/core/styles'
+import { useTheme } from '@material-ui/core/styles'
 
 import Store from './pages/Store'
 import ShopCar from './pages/ShopCar'
@@ -10,18 +10,20 @@ import Order from './pages/Order'
 import {
   AppBar, Typography, Toolbar, IconButton,
   makeStyles, createStyles, Drawer, List,
-  ListItem, ListItemText, Divider,ListItemIcon
+  ListItem, ListItemText, Divider, ListItemIcon,
 } from '@material-ui/core'
 
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
+import Navigation from './components/Navigation'
+
 const drawerWidth = 240
 const leftNav = [
-  { id: 'one', nav: '书城选购', icon: 'shangchengshouye',to:'/'},
-  { id: 'two', nav: '我的购物车', icon: 'gouwuche',to:'/shopcar'},
-  { id: 'three', nav: '我的订单', icon: 'quanbudingdan',to:'/order' }
+  { id: 'one', nav: '书城选购', icon: 'shangchengshouye', to: '/' },
+  { id: 'two', nav: '我的购物车', icon: 'gouwuche', to: '/shopcar' },
+  { id: 'three', nav: '我的订单', icon: 'quanbudingdan', to: '/order' }
 ]
 
 const useStyles = makeStyles((theme) =>
@@ -34,6 +36,7 @@ const useStyles = makeStyles((theme) =>
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
+      backgroundColor:'#409EFF'
     },
     appBarShift: {
       width: `calc(100% - ${drawerWidth}px)`,
@@ -66,7 +69,7 @@ const useStyles = makeStyles((theme) =>
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3),
+      padding: theme.spacing(1),
       transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -96,55 +99,23 @@ function App() {
   }
 
   return (
-    <div className={classes.root}>
-      {/* 应用栏 */}
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-            onClick={handleDrawerOpen}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6">购物书城</Typography>
-        </Toolbar>
-      </AppBar>
+    <Router>
+      <div className={classes.root}>
+        {/* 应用栏 */}
+        <Navigation />
 
-      {/* 临时抽屉 左边导航 */}
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        open={open}
-        anchor="left"
-        classes={{ paper: classes.drawerPaper }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction = 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        
-          <List>
-            {leftNav.map((item, index) => (
-              <ListItem key={item.id} button component={Link} to={item.to}>
-                <ListItemIcon>
-                  <svg className="icon" aria-hidden="true">
-                    <use xlinkHref={`#icon-`+ item.icon}></use>
-                  </svg>
-                </ListItemIcon>
-                <ListItemText primary={item.nav} />
-              </ListItem>
-            ))}
-          </List>
-      </Drawer>
-    </div>
+        <main className={clsx(classes.content, {
+          [classes.contentShift]: open
+        })}>
+          <div className={classes.drawerHeader} />
+          <Route path="/" exact component={(() =>
+            <Redirect to="/" />
+          ), Store}></Route>
+          <Route path="/shopcar" component={ShopCar}></Route>
+          <Route path="/order" component={Order}></Route>
+        </main>
+      </div>
+    </Router>
   );
 }
 
