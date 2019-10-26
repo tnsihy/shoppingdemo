@@ -1,12 +1,67 @@
-import React from 'react'
+import React,{useContext} from 'react'
+import clsx from 'clsx'
+import { leftNav } from '../static/navInfo'
+
+import {
+    AppBar, Typography, Toolbar, IconButton,
+    Drawer, List, ListItem, ListItemText,
+    Divider, ListItemIcon, Link, useTheme,
+    makeStyles, createStyles
+} from '@material-ui/core'
+
+import MenuIcon from '@material-ui/icons/Menu'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+
+const useStyles = makeStyles((theme) =>
+    createStyles({
+        appBar: {
+            transition: theme.transitions.create(['margin', 'width'], {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.leavingScreen,
+            }),
+            backgroundColor: '#409EFF'
+        },
+        appBarShift: {
+            width: `calc(100% - 240px)`,
+            marginLeft: 240,
+            transition: theme.transitions.create(['margin', 'width'], {
+                easing: theme.transitions.easing.easeOut,
+                duration: theme.transitions.duration.enteringScreen,
+            }),
+        },
+        menuButton: {
+            marginRight: theme.spacing(2),
+            color: '#fff'
+        },
+        hide: {
+            display: 'none',
+        },
+        drawer: {
+            width: 240,
+            flexShrink: 0,
+        },
+        drawerPaper: {
+            width: 240,
+        },
+        drawerHeader: {
+            display: 'flex',
+            alignItems: 'center',
+            padding: theme.spacing(0, 1),
+            ...theme.mixins.toolbar,
+            justifyContent: 'flex-end',
+        },
+    })
+)
 
 export default function Navigation() {
 
     const theme = useTheme()
-    
+    const classes = useStyles()
+    const book = useContext(BookContext)
+
     return (
         <div>
-            {/* 顶部应用栏 */}
             <AppBar
                 position="fixed"
                 className={clsx(classes.appBar, {
@@ -25,7 +80,6 @@ export default function Navigation() {
                 </Toolbar>
             </AppBar>
 
-            {/* 临时抽屉 左边导航 */}
             <Drawer
                 className={classes.drawer}
                 variant="persistent"
@@ -39,7 +93,6 @@ export default function Navigation() {
                     </IconButton>
                 </div>
                 <Divider />
-
                 <List>
                     {leftNav.map((item) => (
                         <ListItem key={item.id} button component={Link} to={item.to}>
