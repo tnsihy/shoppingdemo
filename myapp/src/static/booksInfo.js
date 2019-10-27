@@ -32,27 +32,27 @@ export const booksInfo = [
         count:'10'
     },{
         id:'0006',
-        img:'http://img3m7.ddimg.cn/97/5/23738317-1_b_1.jpg',
-        name:'GitHub入门与实践',
-        price:'30.80',
+        img:'http://img3m1.ddimg.cn/90/34/22880871-1_b_3.jpg',
+        name:'算法',
+        price:'78.20',
         count:'10'
     },{
         id:'0007',
-        img:'http://img3m7.ddimg.cn/97/5/23738317-1_b_1.jpg',
-        name:'GitHub入门与实践',
-        price:'30.80',
+        img:'http://img3m4.ddimg.cn/35/0/1540640114-1_b_1.jpg',
+        name:'Node.js实战',
+        price:'88.00',
         count:'10'
     },{
         id:'0008',
-        img:'http://img3m7.ddimg.cn/97/5/23738317-1_b_1.jpg',
-        name:'GitHub入门与实践',
-        price:'30.80',
+        img:'http://img3m4.ddimg.cn/63/9/1900762344-1_b_1.jpg',
+        name:'Web性能实践日志',
+        price:'19.99',
         count:'10'
     },{
         id:'0009',
-        img:'http://img3m7.ddimg.cn/97/5/23738317-1_b_1.jpg',
-        name:'GitHub入门与实践',
-        price:'30.80',
+        img:'http://img3m6.ddimg.cn/32/10/25180286-1_b_3.jpg',
+        name:'Vue.js实战',
+        price:'69.50',
         count:'10'
     }
 ]

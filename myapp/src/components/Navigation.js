@@ -1,14 +1,15 @@
-import React,{useContext} from 'react'
+import React from 'react'
 import clsx from 'clsx'
 import { leftNav } from '../static/navInfo'
 
 import {
     AppBar, Typography, Toolbar, IconButton,
     Drawer, List, ListItem, ListItemText,
-    Divider, ListItemIcon, Link, useTheme,
+    Divider, ListItemIcon, useTheme,
     makeStyles, createStyles
 } from '@material-ui/core'
 
+import {Link} from 'react-router-dom' 
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
@@ -54,11 +55,10 @@ const useStyles = makeStyles((theme) =>
     })
 )
 
-export default function Navigation() {
+export default function Navigation({open,handleDrawerOpen,handleDrawerClose}) {
 
     const theme = useTheme()
     const classes = useStyles()
-    const book = useContext(BookContext)
 
     return (
         <div>
