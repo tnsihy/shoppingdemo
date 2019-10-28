@@ -13,7 +13,7 @@ import Order from '../pages/Order'
 const useStyles = makeStyles((theme) =>
   createStyles({
     content: {
-        flexGrow: 1,
+        flex: 1,
         padding: theme.spacing(1),
         transition: theme.transitions.create('margin', {
           easing: theme.transitions.easing.sharp,

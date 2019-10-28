@@ -53,7 +53,7 @@ export default function ShopCar() {
     const DECREASE = Symbol('DECREASE');
 
     const [shopData, setShopData] = useState(JSON.parse(localStorage.shopData || '[]'))
-    let [totalMoney, setTotalMoney] = useState(0)
+    let [totalMoney, setTotalMoney] = useState(0.00)
     const classes = useStyles()
     // 订单列表
     let [orderList, setOrderList] = useState([])
@@ -105,8 +105,6 @@ export default function ShopCar() {
             setOrderList(orderList)
         }
     }
-    // orderList是订单列表，当选中是加入orderList（即可能进入订单的数据） 如果提交订单后，那么orderList其实应该清空才对
-    // 把orderList的数据赋给realList
 
     // 提交订单
     const handleSubmit = () => {
@@ -126,7 +124,11 @@ export default function ShopCar() {
         localStorage.shopData = JSON.stringify(leaveShopData)
         setShopData(leaveShopData)
 
-        // 5.在订单列表中遍历localStorage数据
+        // 5.清空orderList 还有money
+        setOrderList([])
+        setTotalMoney(0.00)
+
+        // 6.在订单列表中遍历localStorage数据
 
     }
 
@@ -142,12 +144,12 @@ export default function ShopCar() {
                                     <Checkbox
                                     />
                                 </TableCell>
-                                <TableCell width={70}>书本</TableCell>
-                                <TableCell width={200}>书名信息</TableCell>
-                                <TableCell width={70}>单价</TableCell>
-                                <TableCell width={100}>数量</TableCell>
-                                <TableCell width={70}>金额</TableCell>
-                                <TableCell width={100}>操作</TableCell>
+                                <TableCell align="center" width={70}>书本</TableCell>
+                                <TableCell align="center" width={200}>书名信息</TableCell>
+                                <TableCell align="center" width={70}>单价</TableCell>
+                                <TableCell align="center" width={100}>数量</TableCell>
+                                <TableCell align="center" width={70}>金额</TableCell>
+                                <TableCell align="center" width={100}>操作</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -156,16 +158,16 @@ export default function ShopCar() {
                                     <TableCell>
                                         <Checkbox onChange={(event) => changeCheckbox(item, event, index)} />
                                     </TableCell>
-                                    <TableCell><img width="100%" src={item.img} alt={item.name} /></TableCell>
-                                    <TableCell>{item.name}</TableCell>
-                                    <TableCell>￥{item.price}</TableCell>
-                                    <TableCell>
+                                    <TableCell align="center"><img width="100%" src={item.img} alt={item.name} /></TableCell>
+                                    <TableCell align="center">{item.name}</TableCell>
+                                    <TableCell align="center">￥{item.price}</TableCell>
+                                    <TableCell align="center">
                                         <button className={classes.button} onClick={() => oprate(DECREASE, item)}>-</button>
                                         <span className={classes.countSpacing}>{item.count}</span>
                                         <button className={classes.button} onClick={() => oprate(PLUS, item)}>+</button>
                                     </TableCell>
-                                    <TableCell className={classes.jine}>￥{(item.price * item.count).toFixed(2)}</TableCell>
-                                    <TableCell><Button variant="outlined" size="small" onClick={() => deleteClick(index)}>删除</Button></TableCell>
+                                    <TableCell align="center" className={classes.jine}>￥{(item.price * item.count).toFixed(2)}</TableCell>
+                                    <TableCell align="center"><Button variant="outlined" size="small" onClick={() => deleteClick(index)}>删除</Button></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
