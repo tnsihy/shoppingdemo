@@ -35,7 +35,7 @@ function App() {
             handleDrawerOpen={handleDrawerOpen} 
             handleDrawerClose={handleDrawerClose} 
           />
-          <Main open={open} />
+          <Main open={open}/>
       </div>
     </Router>
   );

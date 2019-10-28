@@ -43,6 +43,7 @@ export default function Store() {
         } else {
         
         // 没有该商品，则存进去local，并且初始化数量为1
+        // Object.assign(target,...sources) 用于将所有可枚举属性的值从一个或多个源对象复制到目标对象
         const copyAddItem = Object.assign({ },addItem, {
             count:1
          })
