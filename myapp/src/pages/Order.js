@@ -1,7 +1,15 @@
 import React from 'react'
 import {
-    makeStyles, createStyles, Paper, Container,
-    Typography, TableHead, TableRow, Table, TableCell, TableBody
+    makeStyles,
+    createStyles,
+    Paper,
+    Container,
+    Typography,
+    TableHead,
+    TableRow,
+    Table,
+    TableCell,
+    TableBody
 } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) =>
@@ -27,9 +35,25 @@ const useStyles = makeStyles((theme) =>
 
 export default function Order() {
     const classes = useStyles()
-    const preOrderList = JSON.parse(localStorage.orderList) || "[]"
-    console.log(preOrderList)
+    const preOrderList = JSON.parse(localStorage.orderList || "[]")
+    // const randomNumber = 0
+    // for (let i = 0; i < 6; i++) {
+    //     randomNumber += Math.floor(Math.random() * 10)
+    //     console.log(randomNumber)
+        // orderNumber = new Date().getTime() + '' + randomNumber
+    // }
+    let randomNumber = ''
+    for(let i = 0;i < 6; i++){
+        randomNumber += Math.floor(Math.random()*10)
+    }
 
+    preOrderList.forEach(item => {
+        // 累加器 array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
+        const totalMoney = item.reduce((prev, cur) => +((prev + cur.price * cur.count).toFixed(2)), 0)
+        const orderNumber = new Date().getTime() + randomNumber
+        item.totalMoney = totalMoney
+        item.orderNumber = orderNumber
+    })
     return (
         <div className={classes.root}>
             <span className={classes.title}>我的订单</span>
@@ -59,9 +83,10 @@ export default function Order() {
                                     </TableBody>
                                 </Table>
                             </div>
-                        ))}
+                        ))} 
+                            <Typography>&nbsp;订单编号是:{item.orderNumber}</Typography>
                             <Typography className={classes.total}>总价是：
-                                <span style={{ color: 'red' }}>￥{}</span>
+                                <span style={{ color: 'red' }}>￥{item.totalMoney}</span>
                             </Typography>
                         </Paper>
                     ))
