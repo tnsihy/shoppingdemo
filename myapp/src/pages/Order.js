@@ -42,14 +42,14 @@ export default function Order() {
     //     console.log(randomNumber)
         // orderNumber = new Date().getTime() + '' + randomNumber
     // }
-    let randomNumber = ''
-    for(let i = 0;i < 6; i++){
-        randomNumber += Math.floor(Math.random()*10)
-    }
 
     preOrderList.forEach(item => {
         // 累加器 array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
         const totalMoney = item.reduce((prev, cur) => +((prev + cur.price * cur.count).toFixed(2)), 0)
+        let randomNumber = ''
+        for(let i = 0;i < 6; i++){
+            randomNumber += Math.floor(Math.random()*10)
+        }
         const orderNumber = new Date().getTime() + randomNumber
         item.totalMoney = totalMoney
         item.orderNumber = orderNumber
